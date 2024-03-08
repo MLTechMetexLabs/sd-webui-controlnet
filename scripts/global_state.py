@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 from modules import shared, scripts, sd_models
 from modules.paths import models_path
-from scripts.processor import *
+from scripts.processor import *  # noqa: E403
 import scripts.processor as processor
 from scripts.utils import ndarray_lru_cache
 from scripts.logging import logger
@@ -318,6 +318,10 @@ def select_control_type(
     if pattern in ["canny", "lineart", "scribble/sketch", "mlsd"]:
         filtered_preprocessor_list += [
             x for x in preprocessor_list if "invert" in x.lower()
+        ]
+    if pattern in ["sparsectrl"]:
+        filtered_preprocessor_list += [
+            x for x in preprocessor_list if "scribble" in x.lower()
         ]
     filtered_model_list = [
         model for model in all_models
