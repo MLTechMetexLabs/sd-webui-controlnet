@@ -1,6 +1,6 @@
 fvcore
 mediapipe
-onnxruntime
+onnxruntime-gpu
 opencv-python>=4.8.0
 svglib
 basicsr
