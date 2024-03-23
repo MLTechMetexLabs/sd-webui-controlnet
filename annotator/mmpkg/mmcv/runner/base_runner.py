@@ -331,7 +331,7 @@ class BaseRunner(metaclass=ABCMeta):
 
     def load_checkpoint(self,
                         filename,
-                        map_location='cpu',
+                        map_location='cuda',
                         strict=False,
                         revise_keys=[(r'^module.', '')]):
         return load_checkpoint(

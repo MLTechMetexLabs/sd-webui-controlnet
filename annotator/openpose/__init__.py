@@ -267,9 +267,9 @@ class OpenposeDetector:
         Note: DW Pose models always run on CPU, so no need to `unload` them.
         """
         if self.body_estimation is not None:
-            self.body_estimation.model.to("cpu")
-            self.hand_estimation.model.to("cpu")
-            self.face_estimation.model.to("cpu")
+            self.body_estimation.model.to("cuda")
+            self.hand_estimation.model.to("cuda")
+            self.face_estimation.model.to("cuda")
 
     def detect_hands(
         self, body: BodyResult, oriImg

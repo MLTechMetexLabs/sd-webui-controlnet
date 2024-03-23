@@ -65,7 +65,7 @@ class LVISEvaluator(DatasetEvaluator):
         self._output_dir = output_dir
         self._max_dets_per_image = max_dets_per_image
 
-        self._cpu_device = torch.device("cpu")
+        self._cpu_device = torch.device("cuda")
 
         self._metadata = MetadataCatalog.get(dataset_name)
         json_file = PathManager.get_local_path(self._metadata.json_file)

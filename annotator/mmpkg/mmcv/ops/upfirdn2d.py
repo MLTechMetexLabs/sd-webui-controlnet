@@ -262,7 +262,7 @@ def upfirdn2d(input, kernel, up=1, down=1, pad=(0, 0)):
     Returns:
         Tensor: Tensor after UpFIRDn.
     """
-    if input.device.type == 'cpu':
+    if input.device.type == 'cuda':
         if len(pad) == 2:
             pad = (pad[0], pad[1], pad[0], pad[1])
 

@@ -14,7 +14,7 @@ from modules.modelloader import load_file_from_url  # noqa: F401
 from scripts.logging import logger
 
 
-def load_state_dict(ckpt_path, location="cpu"):
+def load_state_dict(ckpt_path, location="cuda"):
     _, extension = os.path.splitext(ckpt_path)
     if extension.lower() == ".safetensors":
         state_dict = safetensors.torch.load_file(ckpt_path, device=location)

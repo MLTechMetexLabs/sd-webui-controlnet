@@ -229,7 +229,7 @@ class Caffe2RPN(Caffe2Compatible, rpn.RPN):
             rpn_post_nms_topN = self.post_nms_topk[self.training]
 
             device = rpn_rois_list[0].device
-            input_list = [to_device(x, "cpu") for x in (rpn_rois_list + rpn_roi_probs_list)]
+            input_list = [to_device(x, "cuda") for x in (rpn_rois_list + rpn_roi_probs_list)]
 
             # TODO remove this after confirming rpn_max_level/rpn_min_level
             # is not needed in CollectRpnProposals.
@@ -331,7 +331,7 @@ class Caffe2ROIPooler(Caffe2Compatible, poolers.ROIPooler):
             self.max_level - self.min_level + 1 == 4
         ), "Currently DistributeFpnProposals only support 4 levels"
         fpn_outputs = torch.ops._caffe2.DistributeFpnProposals(
-            to_device(pooler_fmt_boxes, "cpu"),
+            to_device(pooler_fmt_boxes, "cuda"),
             roi_canonical_scale=self.canonical_box_size,
             roi_canonical_level=self.canonical_level,
             roi_max_level=self.max_level,
@@ -445,9 +445,9 @@ class Caffe2FastRCNNOutputsInference:
             rois = torch.cat([batch_ids, rois.tensor], dim=1)
 
         roi_pred_bbox, roi_batch_splits = torch.ops._caffe2.BBoxTransform(
-            to_device(rois, "cpu"),
-            to_device(box_regression, "cpu"),
-            to_device(im_info, "cpu"),
+            to_device(rois, "cuda"),
+            to_device(box_regression, "cuda"),
+            to_device(im_info, "cuda"),
             weights=box2box_transform_weights,
             apply_scale=True,
             rotated=is_rotated,
@@ -461,9 +461,9 @@ class Caffe2FastRCNNOutputsInference:
         roi_batch_splits = to_device(roi_batch_splits, device)
 
         nms_outputs = torch.ops._caffe2.BoxWithNMSLimit(
-            to_device(class_prob, "cpu"),
-            to_device(roi_pred_bbox, "cpu"),
-            to_device(roi_batch_splits, "cpu"),
+            to_device(class_prob, "cuda"),
+            to_device(roi_pred_bbox, "cuda"),
+            to_device(roi_batch_splits, "cuda"),
             score_thresh=float(score_thresh),
             nms=float(nms_thresh),
             detections_per_im=int(topk_per_image),
@@ -547,7 +547,7 @@ class Caffe2KeypointRCNNInference:
             if self.use_heatmap_max_keypoint:
                 device = output.device
                 output = torch.ops._caffe2.HeatmapMaxKeypoint(
-                    to_device(output, "cpu"),
+                    to_device(output, "cuda"),
                     pred_instances[0].pred_boxes.tensor,
                     should_output_softmax=True,  # worth make it configerable?
                 )

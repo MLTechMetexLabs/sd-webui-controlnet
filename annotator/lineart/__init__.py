@@ -106,7 +106,7 @@ class LineartDetector:
             from scripts.utils import load_file_from_url
             load_file_from_url(remote_model_path, model_dir=self.model_dir)
         model = Generator(3, 1, 3)
-        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load(model_path, map_location=torch.device('cuda')))
         model.eval()
         self.model = model.to(self.device)
 

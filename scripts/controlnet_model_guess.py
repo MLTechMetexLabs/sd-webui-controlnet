@@ -270,12 +270,12 @@ def build_model_by_guess(state_dict, unet, model_path: str) -> ControlModel:
 
     if 'ip_adapter' in state_dict:
         network = PlugableIPAdapter(state_dict, model_path)
-        network.to('cpu')
+        network.to('cuda')
         return ControlModel(network, ControlModelType.IPAdapter)
 
     if any('lllite' in k for k in state_dict.keys()):
         network = PlugableControlLLLite(state_dict)
-        network.to('cpu')
+        network.to('cuda')
         return ControlModel(network, ControlModelType.Controlllite)
 
     raise Exception('[ControlNet Error] Cannot recognize the ControlModel!')

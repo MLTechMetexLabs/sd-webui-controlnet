@@ -76,4 +76,4 @@ class DepthAnythingDetector:
             return depth
 
     def unload_model(self):
-        self.model.to("cpu")
+        self.model.to("cuda")

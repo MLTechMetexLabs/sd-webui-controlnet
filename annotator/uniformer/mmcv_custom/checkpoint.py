@@ -293,7 +293,7 @@ def _load_checkpoint(filename, map_location=None):
 
 def load_checkpoint(model,
                     filename,
-                    map_location='cpu',
+                    map_location='cuda',
                     strict=False,
                     logger=None):
     """Load checkpoint from a file or URI.

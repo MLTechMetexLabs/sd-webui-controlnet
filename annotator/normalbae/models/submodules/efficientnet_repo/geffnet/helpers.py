@@ -36,7 +36,7 @@ def load_pretrained(model, url, filter_fn=None, strict=True):
         print("=> Warning: Pretrained model URL is empty, using random initialization.")
         return
 
-    state_dict = load_state_dict_from_url(url, progress=False, map_location='cpu')
+    state_dict = load_state_dict_from_url(url, progress=False, map_location='cuda')
 
     input_conv = 'conv_stem'
     classifier = 'classifier'

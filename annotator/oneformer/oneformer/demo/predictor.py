@@ -30,7 +30,7 @@ class VisualizationDemo(object):
             from cityscapesscripts.helpers.labels import labels
             stuff_colors = [k.color for k in labels if k.trainId != 255]
             self.metadata = self.metadata.set(stuff_colors=stuff_colors)
-        self.cpu_device = torch.device("cpu")
+        self.cpu_device = torch.device("cuda")
         self.instance_mode = instance_mode
 
         self.parallel = parallel
@@ -140,7 +140,7 @@ class AsyncPredictor:
         for gpuid in range(max(num_gpus, 1)):
             cfg = cfg.clone()
             cfg.defrost()
-            cfg.MODEL.DEVICE = "cuda:{}".format(gpuid) if num_gpus > 0 else "cpu"
+            cfg.MODEL.DEVICE = "cuda:{}".format(gpuid) if num_gpus > 0 else "cuda"
             self.procs.append(
                 AsyncPredictor._PredictWorker(cfg, self.task_queue, self.result_queue)
             )

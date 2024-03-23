@@ -18,7 +18,7 @@ def init_segmentor(config, checkpoint=None, device=devices.get_device_for("contr
         checkpoint (str, optional): Checkpoint path. If left as None, the model
             will not load any weights.
         device (str, optional) CPU/CUDA device option. Default 'cuda:0'.
-            Use 'cpu' for loading model on CPU.
+            Use 'cuda' for loading model on CPU.
     Returns:
         nn.Module: The constructed segmentor.
     """
@@ -31,7 +31,7 @@ def init_segmentor(config, checkpoint=None, device=devices.get_device_for("contr
     config.model.train_cfg = None
     model = build_segmentor(config.model, test_cfg=config.get('test_cfg'))
     if checkpoint is not None:
-        checkpoint = load_checkpoint(model, checkpoint, map_location='cpu')
+        checkpoint = load_checkpoint(model, checkpoint, map_location='cuda')
         model.CLASSES = checkpoint['meta']['CLASSES']
         model.PALETTE = checkpoint['meta']['PALETTE']
     model.cfg = config  # save the config in the model for convenience

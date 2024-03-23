@@ -145,7 +145,7 @@ class Boxes:
             tensor (Tensor[float]): a Nx4 matrix.  Each row is (x1, y1, x2, y2).
         """
         if not isinstance(tensor, torch.Tensor):
-            tensor = torch.as_tensor(tensor, dtype=torch.float32, device=torch.device("cpu"))
+            tensor = torch.as_tensor(tensor, dtype=torch.float32, device=torch.device("cuda"))
         else:
             tensor = tensor.to(torch.float32)
         if tensor.numel() == 0:

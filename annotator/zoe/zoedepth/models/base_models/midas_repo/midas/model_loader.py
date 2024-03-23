@@ -187,7 +187,7 @@ def load_model(device, model_path, model_type="dpt_large_384", optimize=True, he
     elif model_type == "openvino_midas_v21_small_256":
         ie = Core()
         uncompiled_model = ie.read_model(model=model_path)
-        model = ie.compile_model(uncompiled_model, "CPU")
+        model = ie.compile_model(uncompiled_model, "cuda")
         net_w, net_h = 256, 256
         resize_mode = "upper_bound"
         normalization = NormalizeImage(

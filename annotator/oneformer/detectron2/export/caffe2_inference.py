@@ -52,7 +52,7 @@ class ProtobufModel(torch.nn.Module):
         """
 
         def _get_device_type(torch_tensor):
-            assert torch_tensor.device.type in ["cpu", "cuda"]
+            assert torch_tensor.device.type in ["cuda", "cuda"]
             assert torch_tensor.device.index == 0
             return torch_tensor.device.type
 
@@ -106,8 +106,8 @@ class ProtobufModel(torch.nn.Module):
         # Cast output to torch.Tensor on the desired device
         output_devices = (
             self._infer_output_devices(inputs)
-            if any(t.device.type != "cpu" for t in inputs)
-            else ["cpu" for _ in self.net.Proto().external_output]
+            if any(t.device.type != "cuda" for t in inputs)
+            else ["cuda" for _ in self.net.Proto().external_output]
         )
 
         outputs = []
@@ -139,7 +139,7 @@ class ProtobufDetectionModel(torch.nn.Module):
         super().__init__()
         self.protobuf_model = ProtobufModel(predict_net, init_net)
         self.size_divisibility = get_pb_arg_vali(predict_net, "size_divisibility", 0)
-        self.device = get_pb_arg_vals(predict_net, "device", b"cpu").decode("ascii")
+        self.device = get_pb_arg_vals(predict_net, "device", b"cuda").decode("ascii")
 
         if convert_outputs is None:
             meta_arch = get_pb_arg_vals(predict_net, "meta_architecture", b"GeneralizedRCNN")

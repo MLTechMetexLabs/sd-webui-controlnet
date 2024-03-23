@@ -236,7 +236,7 @@ class Adapter(nn.Module):
                 x = self.body[idx](x)
             hs.append(x)
 
-        self.to('cpu')
+        self.to('cuda')
         return hs
 
 

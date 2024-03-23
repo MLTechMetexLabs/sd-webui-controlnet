@@ -677,7 +677,7 @@ class UnetHook(nn.Module):
             for param in outer.control_params:
                 if param.control_model is not None:
                     if outer.lowvram:
-                        param.control_model.to('cpu')
+                        param.control_model.to('cuda')
 
             # A1111 fix for medvram.
             if shared.cmd_opts.medvram or (getattr(shared.cmd_opts, 'medvram_sdxl', False) and is_sdxl):
@@ -858,7 +858,7 @@ class UnetHook(nn.Module):
         def move_all_control_model_to_cpu():
             for param in getattr(outer, 'control_params', []) or []:
                 if isinstance(param.control_model, torch.nn.Module):
-                    param.control_model.to("cpu")
+                    param.control_model.to("cuda")
 
         def forward_webui(*args, **kwargs):
             # webui will handle other compoments 

@@ -126,7 +126,7 @@ class COCOEvaluator(DatasetEvaluator):
         else:
             self._tasks = tasks
 
-        self._cpu_device = torch.device("cpu")
+        self._cpu_device = torch.device("cuda")
 
         self._metadata = MetadataCatalog.get(dataset_name)
         if not hasattr(self._metadata, "json_file"):

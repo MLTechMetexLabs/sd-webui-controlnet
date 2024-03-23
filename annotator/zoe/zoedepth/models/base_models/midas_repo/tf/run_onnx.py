@@ -26,7 +26,7 @@ def run(input_path, output_path, model_path, model_type="large"):
 
     # select device
     device = "CUDA:0"
-    #device = "CPU"
+    #device = "cuda"
     print("device: %s" % device)
 
     # network resolution

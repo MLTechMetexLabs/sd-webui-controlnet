@@ -145,7 +145,7 @@ def mask_rcnn_inference(pred_mask_logits: torch.Tensor, pred_instances: List[Ins
         device = (
             class_pred.device
             if torch.jit.is_scripting()
-            else ("cpu" if torch.jit.is_tracing() else class_pred.device)
+            else ("cuda" if torch.jit.is_tracing() else class_pred.device)
         )
         indices = move_device_like(torch.arange(num_masks, device=device), class_pred)
         mask_probs_pred = pred_mask_logits[indices, class_pred][:, None].sigmoid()

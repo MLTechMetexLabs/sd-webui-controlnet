@@ -31,14 +31,14 @@ class PlugableControlModel(nn.Module):
         return self.control_model(*args, **kwargs)
 
     def aggressive_lowvram(self):
-        self.to('cpu')
+        self.to('cuda')
 
         def send_me_to_gpu(module, _):
             if self.gpu_component == module:
                 return
 
             if self.gpu_component is not None:
-                self.gpu_component.to('cpu')
+                self.gpu_component.to('cuda')
 
             module.to(devices.get_device_for("controlnet"))
             self.gpu_component = module

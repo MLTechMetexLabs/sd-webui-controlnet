@@ -102,7 +102,7 @@ class BitMasks:
         if isinstance(tensor, torch.Tensor):
             tensor = tensor.to(torch.bool)
         else:
-            tensor = torch.as_tensor(tensor, dtype=torch.bool, device=torch.device("cpu"))
+            tensor = torch.as_tensor(tensor, dtype=torch.bool, device=torch.device("cuda"))
         assert tensor.dim() == 3, tensor.size()
         self.image_size = tensor.shape[1:]
         self.tensor = tensor
@@ -315,7 +315,7 @@ class PolygonMasks:
 
     @property
     def device(self) -> torch.device:
-        return torch.device("cpu")
+        return torch.device("cuda")
 
     def get_bounding_boxes(self) -> Boxes:
         """
@@ -409,7 +409,7 @@ class PolygonMasks:
         device = boxes.device
         # Put boxes on the CPU, as the polygon representation is not efficient GPU-wise
         # (several small tensors for representing a single instance mask)
-        boxes = boxes.to(torch.device("cpu"))
+        boxes = boxes.to(torch.device("cuda"))
 
         results = [
             rasterize_polygons_within_box(poly, box.numpy(), mask_size)

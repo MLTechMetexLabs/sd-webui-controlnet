@@ -852,7 +852,7 @@ class HandRefinerModel:
 
     def unload(self):
         if self.model is not None:
-            self.model.to("cpu")
+            self.model.to("cuda")
 
     def run_model(self, img, res=512, **kwargs):
         img, remove_pad = resize_image_with_pad(img, res)

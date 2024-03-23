@@ -54,7 +54,7 @@ T2IAPI = ENDPOINT + "/controlnet/txt2img"
 DETECTAPI = ENDPOINT + "/controlnet/detect"
 MODELLIST = ENDPOINT + "/controlnet/model_list"
 
-device = "cpu"
+device = "cuda"
 if torch.cuda.is_available():
     device = "cuda"
 

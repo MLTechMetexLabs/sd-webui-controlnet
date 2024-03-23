@@ -84,7 +84,7 @@ class SoftNMSop(torch.autograd.Function):
     @staticmethod
     def forward(ctx, boxes, scores, iou_threshold, sigma, min_score, method,
                 offset):
-        dets = boxes.new_empty((boxes.size(0), 5), device='cpu')
+        dets = boxes.new_empty((boxes.size(0), 5), device='cuda')
         inds = ext_module.softnms(
             boxes.cpu(),
             scores.cpu(),
@@ -231,7 +231,7 @@ def soft_nms(boxes,
     assert method in method_dict.keys()
 
     if torch.__version__ == 'parrots':
-        dets = boxes.new_empty((boxes.size(0), 5), device='cpu')
+        dets = boxes.new_empty((boxes.size(0), 5), device='cuda')
         indata_list = [boxes.cpu(), scores.cpu(), dets.cpu()]
         indata_dict = {
             'iou_threshold': float(iou_threshold),

@@ -155,7 +155,7 @@ def resize_depth(depth, width, height):
     Returns:
         array: processed depth
     """
-    depth = torch.squeeze(depth[0, :, :, :]).to("cpu")
+    depth = torch.squeeze(depth[0, :, :, :]).to("cuda")
 
     depth_resized = cv2.resize(
         depth.numpy(), (width, height), interpolation=cv2.INTER_CUBIC

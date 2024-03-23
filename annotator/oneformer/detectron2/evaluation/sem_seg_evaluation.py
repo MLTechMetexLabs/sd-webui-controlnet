@@ -72,7 +72,7 @@ class SemSegEvaluator(DatasetEvaluator):
         self._distributed = distributed
         self._output_dir = output_dir
 
-        self._cpu_device = torch.device("cpu")
+        self._cpu_device = torch.device("cuda")
 
         self.input_file_to_gt_file = {
             dataset_record["file_name"]: dataset_record["sem_seg_file_name"]

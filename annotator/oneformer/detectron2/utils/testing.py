@@ -33,13 +33,13 @@ def get_model_no_weights(config_path):
     cfg = model_zoo.get_config(config_path)
     if isinstance(cfg, CfgNode):
         if not torch.cuda.is_available():
-            cfg.MODEL.DEVICE = "cpu"
+            cfg.MODEL.DEVICE = "cuda"
         return build_model(cfg)
     else:
         return instantiate(cfg.model)
 
 
-def random_boxes(num_boxes, max_coord=100, device="cpu"):
+def random_boxes(num_boxes, max_coord=100, device="cuda"):
     """
     Create a random Nx4 boxes tensor, with coordinates < max_coord.
     """

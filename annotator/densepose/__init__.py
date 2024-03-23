@@ -26,7 +26,7 @@ def apply_densepose(input_image, cmap="viridis"):
         if not os.path.exists(model_path):
             from scripts.utils import load_file_from_url
             load_file_from_url(remote_torchscript_path, model_dir=model_dir)
-        torchscript_model = torch.jit.load(model_path, map_location="cpu").to(devices.get_device_for("controlnet")).eval()
+        torchscript_model = torch.jit.load(model_path, map_location="cuda").to(devices.get_device_for("controlnet")).eval()
     H, W  = input_image.shape[:2]
 
     hint_image_canvas = np.zeros([H, W], dtype=np.uint8)

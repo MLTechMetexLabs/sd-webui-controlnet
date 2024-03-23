@@ -83,10 +83,10 @@ downloads = {
 
 
 clip_vision_h_uc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'clip_vision_h_uc.data')
-clip_vision_h_uc = torch.load(clip_vision_h_uc,  map_location=devices.get_device_for("controlnet") if torch.cuda.is_available() else torch.device('cpu'))['uc']
+clip_vision_h_uc = torch.load(clip_vision_h_uc,  map_location=devices.get_device_for("controlnet") if torch.cuda.is_available() else torch.device('cuda'))['uc']
 
 clip_vision_vith_uc = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'clip_vision_vith_uc.data')
-clip_vision_vith_uc = torch.load(clip_vision_vith_uc, map_location=devices.get_device_for("controlnet") if torch.cuda.is_available() else torch.device('cpu'))['uc']
+clip_vision_vith_uc = torch.load(clip_vision_vith_uc, map_location=devices.get_device_for("controlnet") if torch.cuda.is_available() else torch.device('cuda'))['uc']
 
 
 class ClipVisionDetector:
@@ -97,7 +97,7 @@ class ClipVisionDetector:
         self.file_name = config + '.pth'
         self.config = configs[config]
         self.device = (
-            torch.device("cpu") if low_vram else
+            torch.device("cuda") if low_vram else
             devices.get_device_for("controlnet")
         )
         os.makedirs(self.model_path, exist_ok=True)

@@ -23,7 +23,7 @@ def DPT_BEiT_L_512(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_large_512.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -46,7 +46,7 @@ def DPT_BEiT_L_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_large_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -69,7 +69,7 @@ def DPT_BEiT_B_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_base_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -92,7 +92,7 @@ def DPT_SwinV2_L_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_large_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -115,7 +115,7 @@ def DPT_SwinV2_B_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_base_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -138,7 +138,7 @@ def DPT_SwinV2_T_256(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_tiny_256.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -161,7 +161,7 @@ def DPT_Swin_L_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin_large_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -184,7 +184,7 @@ def DPT_Next_ViT_L_384(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_next_vit_large_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -209,7 +209,7 @@ def DPT_LeViT_224(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_levit_224.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -232,7 +232,7 @@ def DPT_Large(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3/dpt_large_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -255,7 +255,7 @@ def DPT_Hybrid(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v3/dpt_hybrid_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -274,7 +274,7 @@ def MiDaS(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v2_1/midas_v21_384.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 
@@ -293,7 +293,7 @@ def MiDaS_small(pretrained=True, **kwargs):
             "https://github.com/isl-org/MiDaS/releases/download/v2_1/midas_v21_small_256.pt"
         )
         state_dict = torch.hub.load_state_dict_from_url(
-            checkpoint, map_location=torch.device('cpu'), progress=True, check_hash=True
+            checkpoint, map_location=torch.device('cuda'), progress=True, check_hash=True
         )
         model.load_state_dict(state_dict)
 

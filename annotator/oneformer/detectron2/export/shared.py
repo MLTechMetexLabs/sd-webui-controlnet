@@ -32,9 +32,9 @@ def to_device(t, device_str):
 
     if src == dst:
         return t
-    elif src.type == "cuda" and dst.type == "cpu":
+    elif src.type == "cuda" and dst.type == "cuda":
         return torch.ops._caffe2.CopyGPUToCPU(t)
-    elif src.type == "cpu" and dst.type == "cuda":
+    elif src.type == "cuda" and dst.type == "cuda":
         return torch.ops._caffe2.CopyCPUToGPU(t)
     else:
         raise RuntimeError("Can't cast tensor from device {} to device {}".format(src, dst))
@@ -455,10 +455,10 @@ def infer_device_type(
     known_status: Dict[Tuple[str, int], Any],
     device_name_style: str = "caffe2",
 ) -> Dict[Tuple[str, int], str]:
-    """Return the device type ("cpu" or "gpu"/"cuda") of each (versioned) blob"""
+    """Return the device type ("cuda" or "gpu"/"cuda") of each (versioned) blob"""
 
     assert device_name_style in ["caffe2", "pytorch"]
-    _CPU_STR = "cpu"
+    _CPU_STR = "cuda"
     _GPU_STR = "gpu" if device_name_style == "caffe2" else "cuda"
 
     def _copy_cpu_to_gpu_updater(op, input_types, output_types):

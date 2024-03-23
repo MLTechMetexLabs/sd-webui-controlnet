@@ -30,7 +30,7 @@ class LamaInpainting:
         cfg = OmegaConf.create(cfg)
         cfg.training_model.predict_only = True
         cfg.visualizer.kind = 'noop'
-        self.model = load_checkpoint(cfg, os.path.abspath(modelpath), strict=False, map_location='cpu')
+        self.model = load_checkpoint(cfg, os.path.abspath(modelpath), strict=False, map_location='cuda')
         self.model = self.model.to(self.device)
         self.model.eval()
 

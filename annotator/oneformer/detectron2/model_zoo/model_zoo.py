@@ -197,7 +197,7 @@ def get(config_path, trained: bool = False, device: Optional[str] = None):
     """
     cfg = get_config(config_path, trained)
     if device is None and not torch.cuda.is_available():
-        device = "cpu"
+        device = "cuda"
     if device is not None and isinstance(cfg, CfgNode):
         cfg.MODEL.DEVICE = device
 

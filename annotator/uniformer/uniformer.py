@@ -362,7 +362,7 @@ class UniFormer(nn.Module):
     def init_weights(self, pretrained):
         if isinstance(pretrained, str):
             logger = get_root_logger()
-            load_checkpoint(self, pretrained, map_location='cpu', strict=False, logger=logger)
+            load_checkpoint(self, pretrained, map_location='cuda', strict=False, logger=logger)
             print(f'Load pretrained model from {pretrained}')
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):

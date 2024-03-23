@@ -61,7 +61,7 @@ def find_top_rpn_proposals(
     device = (
         proposals[0].device
         if torch.jit.is_scripting()
-        else ("cpu" if torch.jit.is_tracing() else proposals[0].device)
+        else ("cuda" if torch.jit.is_tracing() else proposals[0].device)
     )
 
     # 1. Select top-k anchor for every level and every image

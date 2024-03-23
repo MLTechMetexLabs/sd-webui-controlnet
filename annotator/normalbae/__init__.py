@@ -12,7 +12,7 @@ import torchvision.transforms as transforms
 
 # load model
 def load_checkpoint(fpath, model):
-    ckpt = torch.load(fpath, map_location='cpu')['model']
+    ckpt = torch.load(fpath, map_location='cuda')['model']
 
     load_dict = {}
     for k, v in ckpt.items():

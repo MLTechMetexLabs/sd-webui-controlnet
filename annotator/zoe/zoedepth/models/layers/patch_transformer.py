@@ -47,7 +47,7 @@ class PatchTransformerEncoder(nn.Module):
         self.embedding_convPxP = nn.Conv2d(in_channels, embedding_dim,
                                            kernel_size=patch_size, stride=patch_size, padding=0)
         
-    def positional_encoding_1d(self, sequence_length, batch_size, embedding_dim, device='cpu'):
+    def positional_encoding_1d(self, sequence_length, batch_size, embedding_dim, device='cuda'):
         """Generate positional encodings
 
         Args:

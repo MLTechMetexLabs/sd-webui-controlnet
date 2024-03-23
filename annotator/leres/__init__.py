@@ -47,7 +47,7 @@ def apply_leres(input_image, thr_a, thr_b, boost=False):
         if torch.cuda.is_available():
             checkpoint = torch.load(model_path)
         else:
-            checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
+            checkpoint = torch.load(model_path, map_location=torch.device('cuda'))
 
         model = RelDepthModel(backbone='resnext101')
         model.load_state_dict(strip_prefix_if_present(checkpoint['depth_model'], "module."), strict=True)

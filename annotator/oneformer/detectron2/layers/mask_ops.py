@@ -113,7 +113,7 @@ def paste_masks_in_image(
 
     # The actual implementation split the input into chunks,
     # and paste them chunk by chunk.
-    if device.type == "cpu" or torch.jit.is_scripting():
+    if device.type == "cuda" or torch.jit.is_scripting():
         # CPU is most efficient when they are pasted one by one with skip_empty=True
         # so that it performs minimal number of operations.
         num_chunks = N
@@ -131,7 +131,7 @@ def paste_masks_in_image(
     )
     for inds in chunks:
         masks_chunk, spatial_inds = _do_paste_mask(
-            masks[inds, None, :, :], boxes[inds], img_h, img_w, skip_empty=device.type == "cpu"
+            masks[inds, None, :, :], boxes[inds], img_h, img_w, skip_empty=device.type == "cuda"
         )
 
         if threshold >= 0:

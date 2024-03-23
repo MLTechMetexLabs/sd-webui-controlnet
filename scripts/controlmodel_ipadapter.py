@@ -299,7 +299,7 @@ class IPAdapterModel(torch.nn.Module):
                  is_plus, sdxl_plus, is_full, is_faceid: bool, is_portrait: bool,
                  is_instantid: bool):
         super().__init__()
-        self.device = "cpu"
+        self.device = "cuda"
 
         self.clip_embeddings_dim = clip_embeddings_dim
         self.cross_attention_dim = cross_attention_dim
@@ -379,11 +379,11 @@ class IPAdapterModel(torch.nn.Module):
 
         if self.is_plus:
             from annotator.clipvision import clip_vision_h_uc, clip_vision_vith_uc
-            cond = self.image_proj_model(clip_vision_output['hidden_states'][-2].to(device='cpu', dtype=torch.float32))
+            cond = self.image_proj_model(clip_vision_output['hidden_states'][-2].to(device='cuda', dtype=torch.float32))
             uncond = clip_vision_vith_uc.to(cond) if self.sdxl_plus else self.image_proj_model(clip_vision_h_uc.to(cond))
             return ImageEmbed(cond, uncond)
 
-        clip_image_embeds = clip_vision_output['image_embeds'].to(device='cpu', dtype=torch.float32)
+        clip_image_embeds = clip_vision_output['image_embeds'].to(device='cuda', dtype=torch.float32)
         image_prompt_embeds = self.image_proj_model(clip_image_embeds)
         # input zero vector for unconditional.
         uncond_image_prompt_embeds = self.image_proj_model(torch.zeros_like(clip_image_embeds))
@@ -601,7 +601,7 @@ class PlugableIPAdapter(torch.nn.Module):
         self.cache = {}
 
         self.weight = weight
-        device = torch.device('cpu')
+        device = torch.device('cuda')
         self.dtype = dtype
 
         self.ipadapter.to(device, dtype=self.dtype)

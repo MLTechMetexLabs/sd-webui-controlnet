@@ -85,7 +85,7 @@ def _assign_device_option(
     """
 
     def _get_device_type(torch_tensor):
-        assert torch_tensor.device.type in ["cpu", "cuda"]
+        assert torch_tensor.device.type in ["cuda", "cuda"]
         assert torch_tensor.device.index == 0
         return torch_tensor.device.type
 
@@ -150,7 +150,7 @@ def export_caffe2_detection_model(model: torch.nn.Module, tensor_inputs: List[to
 
     # Apply protobuf optimization
     fuse_alias_placeholder(predict_net, init_net)
-    if any(t.device.type != "cpu" for t in tensor_inputs):
+    if any(t.device.type != "cuda" for t in tensor_inputs):
         fuse_copy_between_cpu_and_gpu(predict_net)
         remove_dead_end_ops(init_net)
         _assign_device_option(predict_net, init_net, tensor_inputs)

@@ -73,7 +73,7 @@ def apply_hed(input_image, is_safe=False):
             from scripts.utils import load_file_from_url
             load_file_from_url(remote_model_path, model_dir=modeldir)
         netNetwork = ControlNetHED_Apache2().to(devices.get_device_for("controlnet"))
-        netNetwork.load_state_dict(torch.load(modelpath, map_location='cpu'))
+        netNetwork.load_state_dict(torch.load(modelpath, map_location='cuda'))
     netNetwork.to(devices.get_device_for("controlnet")).float().eval()
 
     assert input_image.ndim == 3
