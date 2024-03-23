@@ -1032,7 +1032,7 @@ class UnetHook(nn.Module):
 
     def restore(self):
         scripts.script_callbacks.remove_callbacks_for_function(self.guidance_schedule_handler)
-        self.control_params = None
+        # self.control_params = None
 
         if self.model is not None:
             if hasattr(self.model, "_original_forward"):
